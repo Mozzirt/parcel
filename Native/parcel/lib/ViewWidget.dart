@@ -56,20 +56,19 @@ class _ViewState extends State<ViewWidget> {
                 },
                 onPageFinished: (url) {
                   _url = url;
-                  print("page loaded = " + url);
+                  print("page loaded = $url");
 
                   // 기기 고유번호
                   getDeviceUniqueId().then((value) =>  {
-                    print(value)
+                    _webViewController.evaluateJavascript(value)
                   });
-                  print("FIN");
 
                   setState(() {
                     isLoading = false;
                   });
                 },
               ),
-              isLoading ? Center(child: CircularProgressIndicator(),) // TODO 임시 서큘러로딩
+              isLoading ? const Center(child: CircularProgressIndicator(),) // TODO 임시 서큘러로딩
                   : Stack(),
             ],
           ),
@@ -81,25 +80,25 @@ class _ViewState extends State<ViewWidget> {
         future.then((canGoBack) {
           if (canGoBack) {
             // 메인에서 뒤로가기
-            if (_url == (serverURL + "/main")) {
+            if (_url == ("$serverURL/main")) {
               if (Platform.isAndroid) {
                 showDialog(
                     context: context,
                     builder: (context) =>
                         AlertDialog(
-                          title: Text('앱종료이벤트'),
+                          title: const Text('앱종료이벤트'),
                           actions: <Widget>[
                             FlatButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('취소'),
+                              child: const Text('취소'),
                             ),
                             FlatButton(
                               onPressed: () {
                                 SystemNavigator.pop();
                               },
-                              child: Text('종료'),
+                              child: const Text('종료'),
                             ),
                           ],
                         ));
@@ -128,10 +127,8 @@ class _ViewState extends State<ViewWidget> {
                 // 토스트 메시지 내용
                 gravity: ToastGravity.BOTTOM,
                 backgroundColor: Colors.grey,
-                // 배경색 빨강색
                 fontSize: 14.0,
                 textColor: Colors.white,
-                // 폰트 하얀색
                 toastLength: Toast.LENGTH_SHORT // 토스트 메시지 지속시간 짧게
             );
           }
@@ -140,21 +137,26 @@ class _ViewState extends State<ViewWidget> {
 
 
   Future<String> getDeviceUniqueId() async {
-    var deviceUUID = 'fail';
+    var deviceUUID = 'none';
+    String? deviceModel = 'none';
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       var androidInfo = await deviceInfo.androidInfo;
-      deviceUUID = androidInfo.version.incremental!; // TODO 추가적인 데이터 붙여야 난수값일듯 ???
+      deviceUUID = androidInfo.id!;
+      deviceModel = androidInfo.model!;
     } else if (Platform.isIOS) {
       var iosInfo = await deviceInfo.iosInfo;
       deviceUUID = iosInfo.identifierForVendor!;
+      deviceModel = iosInfo.model!;
     } else if (kIsWeb) {
       var webInfo = await deviceInfo.webBrowserInfo;
       deviceUUID = webInfo.vendor! +
           webInfo.userAgent! +
           webInfo.hardwareConcurrency.toString();
+      deviceModel = webInfo.browserName.toString(); // enum
     }
-    return deviceUUID;
+    var deviceFunction = 'deviceInfo("$deviceUUID","$deviceModel")';
+    return deviceFunction;
   }
 }
 
