@@ -1,0 +1,130 @@
+.drawer-root-container {
+  position: fixed;
+  top: 21%;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #F7F8F8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px 15px 0px 0px;
+  
+  .wrapper {
+    position: relative;
+    height: 79%;
+
+    .drawer-title {
+      padding: 29px 0px 0px 33px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 21px;
+      letter-spacing: 0.02em;
+    }
+
+    .close {
+      position: absolute;
+      right: 38px;
+      top: 26px;
+    }
+
+    .delivery-division-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 50px 7% 0px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      color: #7E7C7C;
+  
+      .delivery-division-tab {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 5px;
+        margin: 0px 3px;
+  
+        &.active {
+          color: #6650FF;
+          font-weight: 600;
+          border-bottom: 2px solid #6650FF;
+        }
+      }
+    }
+
+    .delivery-company-container {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+
+      .card-list {
+        margin: 28px 33px 0px;
+        width: 100%;
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr) );
+        justify-items: center;
+
+        .card-item {
+          height: 110px;
+          width: 110px;
+          border: 1px solid #E4E4E4;
+          box-shadow: 0px 4px 4px rgba(223, 223, 223, 0.25);
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .delivery-ci-container {
+            width: 110px;
+            height: 60px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+
+          .card-name {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 22px;
+            letter-spacing: 0.02em;
+          }
+        }
+      }
+    }
+
+    .button-container {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+
+      .button-name {
+        width: 83%;
+        height: 65px;
+        background-color: #6650FF;
+        border-radius: 500px;
+        position: absolute;
+        bottom: 9.6%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 44px;
+        letter-spacing: -0.005em;
+        color: #FFFFFF;
+      }
+    }
+
+  }
+}
