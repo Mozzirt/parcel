@@ -31,7 +31,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 50px 7% 0px;
+      margin: 5.3vh 7% 0px;
       font-style: normal;
       font-weight: 500;
       font-size: 15px;
@@ -65,7 +65,7 @@
         width: 100%;
         display: grid;
         gap: calc(3.7vw);
-        grid-template-columns: repeat(auto-fill, minmax(25.7vw, 1fr) );
+        grid-template-columns: repeat(auto-fill, minmax(min(25.7vw, 110px), 1fr));
         justify-items: center;
 
         .card-item {
