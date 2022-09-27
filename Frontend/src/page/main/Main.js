@@ -1,5 +1,7 @@
 import './Main.scss'
 import Footer from '../../component/nav/footer/Footer'
+import SelectDeliveryCompany from '../../component/drawer/SelectDeliveryCompany'
+import { useState } from 'react'
 
 const Cards = () => {
     const data = [
@@ -49,11 +51,22 @@ const Cards = () => {
 }
 
 function Main() {
+    const [buttonActiveIndex, setButtonActiveIndex] = useState(0)
+    const [display, setDisplay] = useState(false)
+    console.log(buttonActiveIndex);
+    const toggleActive = index => {
+        setButtonActiveIndex(() => index)
+    }
+
+    const search = () => {
+        setDisplay(!display)
+    }
+
     return (
         <div className='main-root-container'>
             <div className='main-top-area'>
                 <div className='button notification'>
-                    <img src='/asset/notification.svg' alt='알림'></img>
+                    <img src='/asset/notification.svg' alt='알림' onClick={search}></img>
                 </div>
                 <div className='top-text-box'>
                     운송장번호로<br />
@@ -64,16 +77,16 @@ function Main() {
                         <img src='/asset/parcel-box.svg' alt='박스'></img>
                     </div>
                     <input className='search-input' type="text" />
-                    <div className='button search'><img src='/asset/search.svg' alt='박스' /></div>
+                    <div className='button search'><img src='/asset/search.svg' alt='검색' onClick={search} /></div>
                 </div>
             </div>
             <div className='main-button-area'>
                 <div className='button delivery-status'>
-                    <div className='left selected'>
+                    <div className={'left' + (buttonActiveIndex == 0 ? ' selected' : '')} onClick={() => toggleActive(0)}>
                         배송현황
                     </div>
                     <div className='separator'></div>
-                    <div className='right'>
+                    <div className={'right' + (buttonActiveIndex == 1 ? ' selected' : '')} onClick={() => toggleActive(1)}>
                         배송완료
                     </div>
                 </div>
@@ -90,6 +103,7 @@ function Main() {
                 <Cards />
             </div>
             <Footer />
+            <SelectDeliveryCompany display={display}></SelectDeliveryCompany>
         </div>
     );
 }

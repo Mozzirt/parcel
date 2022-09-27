@@ -1,4 +1,6 @@
 .drawer-root-container {
+  position: relative;
+  animation: fadeInUp 0.5s;
   position: fixed;
   top: 21%;
   width: 100%;
@@ -127,5 +129,20 @@
       }
     }
 
+  }
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
   }
 }

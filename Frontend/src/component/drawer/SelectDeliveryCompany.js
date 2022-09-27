@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './SelectDeliveryCompany.scss';
 
 const Cards = () => {
@@ -64,9 +65,12 @@ const Cards = () => {
   )
 }
 
-function SelectDeliveryCompany() {
+function SelectDeliveryCompany(props) {
+  console.log(props);
+  const {display} = props
+
   return (
-    <div className='drawer-root-container'>
+    <div className={'drawer-root-container' + (display ? ' show' : ' hide')}>
       <div className='wrapper'>
         <div className='drawer-title'>
           택배사 선택

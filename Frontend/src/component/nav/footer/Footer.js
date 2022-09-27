@@ -1,31 +1,45 @@
+import { useState } from 'react';
 import './Footer.scss'
 
 function Footer() {
-  const menus = ['home', 'setting']
-  const src = {
-    home: '/asset/nav/home_active.svg',
-    setting: '/asset/nav/setting.svg'
-  }
-
-  function test(event) {
-    const menu = event.target.alt
-
-    if(src[menu].indexOf('_active') === -1) {
-      src[menu] = src[menu].replace('.svg', '_active.svg')
-
-      const inactiveMenus = menus.filter(v => v !== menu)
-      inactiveMenus.forEach(v => src[v] = src[v].replace('_active.svg', '.svg'))
+  const [buttonActiveIndex, setButtonActiveIndex] = useState(0)
+  const menus = [
+    {
+      name: 'home',
+      basic: '/asset/nav/home_active.svg',
+      active: '/asset/nav/home.svg'
+    },
+    {
+      name: 'setting',
+      basic: '/asset/nav/setting.svg',
+      active: '/asset/nav/setting_active.svg'
     }
-  }
+  ]
 
+  const toggleActive = index => {
+    console.log(index);
+    setButtonActiveIndex(() => index)
+  }
+  
   return (
     <div className='footer-root-container'>
       <div className='footer-nav'>
-          <div className='button' onClick={test}>
-              <img src={src.home} alt='home'></img>
+        {/* {
+          menus.map((menu, index) => (
+            <div className='button' key={index}>
+              <img 
+                src={buttonActiveIndex === index ? menu.active : menu.basic} 
+                alt={menu.name}
+                onClick={() => toggleActive(index)} 
+                />
+            </div>
+          ))
+        } */}
+          <div className='button' onClick={() => toggleActive(0)}>
+              <img src={buttonActiveIndex === 0 ? menus[0].basic : menus[0].active} alt='home'></img>
           </div>
-          <div className='button'  onClick={test}>
-              <img src={src.setting} alt='setting'></img>
+          <div className='button'  onClick={() => toggleActive(1)}>
+              <img src={buttonActiveIndex === 0 ? menus[1].basic : menus[1].active} alt='setting'></img>
           </div>
       </div>
     </div>
