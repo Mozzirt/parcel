@@ -106,8 +106,8 @@
 
     .main-content {
         padding: 18px;
-        height: calc(100vh - 530px);
         overflow: auto;
+        background-color: #F5F5F5;
 
         .sort-area {
             display: flex;
