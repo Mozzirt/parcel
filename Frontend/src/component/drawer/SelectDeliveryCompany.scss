@@ -73,6 +73,8 @@
         .card-item {
           height: 25.7vw;
           width: 25.7vw;
+          max-width: 110px;
+          max-height: 110px;
           border: 1px solid #E4E4E4;
           box-shadow: 0px 4px 4px rgba(223, 223, 223, 0.25);
           border-radius: 8px;
