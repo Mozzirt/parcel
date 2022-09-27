@@ -109,6 +109,8 @@
 
     .main-content {
         padding: 18px;
+        height: calc(100vh - 530px);
+        overflow: auto;
 
         .sort-area {
             display: flex;
