@@ -2,7 +2,7 @@
     width: 100vw;
 
     .main-top-area {
-        padding: 50px 32px 32px 32px;
+        padding: max(5.3vh, 30px) 32px max(3.4vh, 20px) 32px;
         background: linear-gradient(61.33deg, #6571FF -6.17%, #582EFF 101.48%);
         border-radius: 0px 0px 45px 0px;
 
@@ -19,7 +19,7 @@
         }
 
         .top-text-box {
-            margin-top: 16px;
+            margin-top: min(1.6vh, 16px);
             font-weight: 600;
             font-size: 30px;
             color: rgba(255, 255, 255, 0.9);
@@ -33,7 +33,8 @@
             width: 100%;
 
             input {
-                height: 48px;
+                min-height: 40px;
+                height: 5.2vh;
                 width: calc(100% - 36px);
                 box-shadow: 0px 4px 4px rgba(104, 104, 104, 0.25);
                 border-radius: 8px;
@@ -70,7 +71,7 @@
     }
 
     .main-button-area {
-        margin: 20px 18px;
+        margin: 2vh 18px;
         
         .delivery-status {
             display: flex;
