@@ -1,73 +1,56 @@
-import { useState } from 'react';
-import './SelectDeliveryCompany.scss';
+import React, { useEffect, useRef, useState } from 'react'
+import './SelectDeliveryCompany.scss'
+import data from './data'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
 
-const Cards = () => {
-  const data = [
-      {
-        key: 1,
-        src: '/asset/ci/rectangle/Group 34316.svg',
-        name: '로젠택배'        
-      },
-      {
-        key: 2,
-        src: '/asset/ci/rectangle/Group 34318.svg',
-        name: 'CJ대한통운'        
-      },
-      {
-        key: 3,
-        src: '/asset/ci/rectangle/Group 34319.svg',
-        name: '롯데택배'       
-      },
-      {
-        key: 4,
-        src: '/asset/ci/rectangle/Group 34320.svg',
-        name: '우체국'        
-      },
-      {
-        key: 5,
-        src: '/asset/ci/rectangle/Group 34321.svg',
-        name: '경동택배'        
-      },
-      {
-        key: 6,
-        src: '/asset/ci/rectangle/Group 34322.svg',
-        name: '쿠팡'        
-      },
-      {
-        key: 7,
-        src: '/asset/ci/rectangle/image 22.svg',
-        name: '마켓컬리'        
-      },
-      {
-        key: 8,
-        src: '/asset/ci/rectangle/image 10.svg',
-        name: '한진택배'        
-      },
-  ]
-
+const Cards = (props) => {
   return (
-      <div className="delivery-company-container">
-        <div className='card-list'>
-          {
-              data.map((item, index) => (
-                <div className='card-item' key={index}>
-                  <div className='delivery-ci-container'>
-                    <img src={item.src} alt={item.name} />
-                  </div>
-                  <div className='card-name'>
-                    {item.name}
-                  </div>
-                </div>
-              ))
-          }
-        </div>
+    <div className="delivery-company-container">
+      <div className='card-list'>
+        {
+          props.items.map((item, index) => (
+            <div className='card-item' key={index}>
+              <div className='delivery-ci-container'>
+                <img src={item.src} alt={item.name} />
+              </div>
+              <div className='card-name'>
+                {item.name}
+              </div>
+            </div>
+          ))
+        }
       </div>
+    </div>
   )
 }
 
 function SelectDeliveryCompany(props) {
-  console.log(props);
-  const {display} = props
+  const [display, setDisplay] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const sliderRef = useRef();
+
+  const slickSetting = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (current, next) => setSlideIndex(next)
+  }
+
+  useEffect(() => {
+    setDisplay(props.display);
+  })
+
+  const closeModal = () => {
+    setDisplay(!display)
+  }
+
+  const moveTab = index => {
+    sliderRef.current.slickGoTo(index);
+  }
+
 
   return (
     <div className={'drawer-root-container' + (display ? ' show' : ' hide')}>
@@ -76,22 +59,27 @@ function SelectDeliveryCompany(props) {
           택배사 선택
         </div>
         <div className='button close'>
-          <img src='/asset/close_modal.svg' alt='close'></img>
+          <img src='/asset/close_modal.svg' alt='close' onClick={closeModal}></img>
         </div>
 
         <div className='delivery-division-box button'>
-          <div className='delivery-division-tab active'>
+          <div className={'delivery-division-tab' + (slideIndex === 0 ? ' active': '')} onClick={() => moveTab(0)}>
             국내택배
           </div>
-          <div className='delivery-division-tab'>
+          <div className={'delivery-division-tab' + (slideIndex === 1 ? ' active': '')} onClick={() => moveTab(1)}>
             쇼핑몰택배
           </div>
-          <div className='delivery-division-tab'>
+          <div className={'delivery-division-tab' + (slideIndex === 2 ? ' active': '')} onClick={() => moveTab(2)}>
             해외택배
           </div>
         </div>
 
-        <Cards />
+        <Slider {...slickSetting} ref={sliderRef}>
+          <Cards items={data.filter(v => v.division === 1)}/>
+          <Cards items={data.filter(v => v.division === 2)}/>
+          <Cards items={data.filter(v => v.division === 3)}/>
+        </Slider>
+
 
         <div className='button button-container'>
           <div className='button-name'>
