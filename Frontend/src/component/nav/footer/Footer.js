@@ -6,8 +6,13 @@ function Footer() {
   const menus = [
     {
       name: 'home',
-      basic: '/asset/nav/home_active.svg',
-      active: '/asset/nav/home.svg'
+      basic: '/asset/nav/home.svg',
+      active: '/asset/nav/home_active.svg'
+    },
+    {
+      name: 'setting',
+      basic: '/asset/nav/user.svg',
+      active: '/asset/nav/setting_active.svg'
     },
     {
       name: 'setting',
@@ -17,7 +22,6 @@ function Footer() {
   ]
 
   const toggleActive = index => {
-    console.log(index);
     setButtonActiveIndex(() => index)
   }
   
@@ -36,10 +40,13 @@ function Footer() {
           ))
         } */}
           <div className='button' onClick={() => toggleActive(0)}>
-              <img src={buttonActiveIndex === 0 ? menus[0].basic : menus[0].active} alt='home'></img>
+              <img src={buttonActiveIndex === 0 ? menus[0].active : menus[0].basic} alt='home'></img>
           </div>
-          <div className='button'  onClick={() => toggleActive(1)}>
-              <img src={buttonActiveIndex === 0 ? menus[1].basic : menus[1].active} alt='setting'></img>
+          <div className='button' onClick={() => toggleActive(1)}>
+              <img src={buttonActiveIndex === 1 ? menus[1].active : menus[1].basic} alt='user'></img>
+          </div>
+          <div className='button' onClick={() => toggleActive(2)}>
+              <img src={buttonActiveIndex === 2 ? menus[2].active : menus[2].basic} alt='setting'></img>
           </div>
       </div>
     </div>
