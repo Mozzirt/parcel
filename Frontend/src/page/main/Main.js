@@ -2,6 +2,7 @@ import './Main.scss'
 import Footer from '../../component/nav/footer/Footer'
 import SelectDeliveryCompany from '../../component/drawer/SelectDeliveryCompany'
 import React, { useState } from 'react'
+import Loading from '../../component/loading/xm/Loading'
 
 const Cards = () => {
     const data = [
@@ -78,6 +79,20 @@ function Main() {
                     </div>
                     <input className='search-input' type="text" />
                     <div className='button search'><img src='/asset/search.svg' alt='검색' onClick={search} /></div>
+                </div>
+                <div className='recommend-area'>
+                    <div className='company-icon button'>
+                        <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
+                        롯데택배
+                    </div>
+                    <div className='company-icon button'>
+                        <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
+                        롯데택배
+                    </div>
+                    <div className='company-icon button'>
+                        <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
+                        롯데택배
+                    </div>
                 </div>
             </div>
             <div className='main-button-area'>

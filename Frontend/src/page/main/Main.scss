@@ -68,6 +68,31 @@
                 }
             }
         }
+
+        .recommend-area {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+
+            .company-icon {
+                display: flex;
+                background: rgba(255, 255, 255, 0.85);
+                border: 0.5px solid #FFFFFF;
+                border-radius: 500px;
+                padding: 3px 11px 3px 4px;
+                align-items: center;
+
+                font-style: normal;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 22px;
+                letter-spacing: 0.02em;
+            }
+
+            .loading {
+                
+            }
+        }
     }
 
     .main-button-area {
