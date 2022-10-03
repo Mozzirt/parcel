@@ -6,12 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 
 const Cards = (props) => {
+  const {items, selectedCard, setSelectedCard} = props
+  
+  const clickCard = (card) => {
+    setSelectedCard(card)
+  }
+  
   return (
     <div className="delivery-company-container">
       <div className='card-list'>
         {
-          props.items.map((item, index) => (
-            <div className='card-item' key={index}>
+          items.map((item, index) => (
+            <div className={'button card-item ' + (item.key === selectedCard?.key ? 'active' : '')} key={index} onClick={() => clickCard(item)}>
               <div className='delivery-ci-container'>
                 <img src={item.src} alt={item.name} />
               </div>
@@ -27,9 +33,11 @@ const Cards = (props) => {
 }
 
 function SelectDeliveryCompany(props) {
-  const [display, setDisplay] = useState(false);
-  const [slideIndex, setSlideIndex] = useState(0);
-  const sliderRef = useRef();
+  const [display, setDisplay] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0)
+  const sliderRef = useRef()
+
+  const [selectedCard, setSelectedCard] = useState()
 
   const slickSetting = {
     infinite: true,
@@ -40,7 +48,7 @@ function SelectDeliveryCompany(props) {
   }
 
   useEffect(() => {
-    setDisplay(props.display);
+    setDisplay(props.display)
   })
 
   const closeModal = () => {
@@ -48,7 +56,7 @@ function SelectDeliveryCompany(props) {
   }
 
   const moveTab = index => {
-    sliderRef.current.slickGoTo(index);
+    sliderRef.current.slickGoTo(index)
   }
 
 
@@ -75,9 +83,9 @@ function SelectDeliveryCompany(props) {
         </div>
 
         <Slider {...slickSetting} ref={sliderRef}>
-          <Cards items={data.filter(v => v.division === 1)}/>
-          <Cards items={data.filter(v => v.division === 2)}/>
-          <Cards items={data.filter(v => v.division === 3)}/>
+          <Cards items={data.filter(v => v.division === 1)} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
+          <Cards items={data.filter(v => v.division === 2)} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
+          <Cards items={data.filter(v => v.division === 3)} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
         </Slider>
 
 
