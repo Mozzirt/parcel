@@ -33,11 +33,11 @@ const Cards = (props) => {
 }
 
 function SelectDeliveryCompany(props) {
-  const [display, setDisplay] = useState(false)
+  const {display, closeModal} = props
   const [slideIndex, setSlideIndex] = useState(0)
   const sliderRef = useRef()
 
-  const [selectedCard, setSelectedCard] = useState()
+  const [selectedCard, setSelectedCard] = useState(null)
 
   const slickSetting = {
     infinite: true,
@@ -45,14 +45,6 @@ function SelectDeliveryCompany(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange: (current, next) => setSlideIndex(next)
-  }
-
-  useEffect(() => {
-    setDisplay(props.display)
-  })
-
-  const closeModal = () => {
-    setDisplay(!display)
   }
 
   const moveTab = index => {

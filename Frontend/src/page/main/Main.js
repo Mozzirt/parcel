@@ -52,23 +52,21 @@ const Cards = () => {
 
 function Main() {
     const [buttonActiveIndex, setButtonActiveIndex] = useState(0)
-    const [display, setDisplay] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     
     const toggleActive = index => {
         setButtonActiveIndex(index)
     }
 
-    const modalOpen = () => {
-        // setDisplay(() => false)
-        // setDisplay(() => true)
-        setDisplay(() => !display)
+    const search = () => {
+        setModalOpen(!modalOpen)
     }
 
     return (
         <div className='main-root-container'>
             <div className='main-top-area'>
                 <div className='button notification'>
-                    <img src='/asset/notification.svg' alt='알림' onClick={modalOpen}></img>
+                    <img src='/asset/notification.svg' alt='알림'></img>
                 </div>
                 <div className='top-text-box'>
                     운송장번호로<br />
@@ -79,7 +77,7 @@ function Main() {
                         <img src='/asset/parcel-box.svg' alt='박스'></img>
                     </div>
                     <input className='search-input' type="text" />
-                    <div className='button search'><img src='/asset/search.svg' alt='검색' onClick={modalOpen} /></div>
+                    <div className='button search'><img src='/asset/search.svg' alt='검색' onClick={search} /></div>
                 </div>
             </div>
             <div className='main-button-area'>
@@ -105,7 +103,7 @@ function Main() {
                 <Cards />
             </div>
             <Footer />
-            <SelectDeliveryCompany display={display}></SelectDeliveryCompany>
+            <SelectDeliveryCompany display={modalOpen} closeModal={() => setModalOpen(false)}></SelectDeliveryCompany>
         </div>
     );
 }
