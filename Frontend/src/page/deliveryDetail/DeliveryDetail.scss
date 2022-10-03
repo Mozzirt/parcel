@@ -1,0 +1,58 @@
+.detail-main-container {
+
+    .top-area {
+        padding: 75px 30px 30px 30px;
+
+        .delivery-info-area {
+            display: flex;
+
+            .logo {
+                display: inline-block;
+            }
+
+            .delivery-info {
+                padding-left: 27px;
+
+                .delivery-name {
+                    font-family: 'Noto Sans';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 22px;
+                    line-height: 19px;
+                    letter-spacing: 0.02em;
+                    color: #263257;
+                }
+
+                .detail-info {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 19px;
+                    letter-spacing: 0.02em;
+                    color: #505050;
+                    margin-top: 15px;
+                    
+                    .date-area {
+
+
+                        .date {
+                            
+                        }
+
+                    }
+                    
+                    .tracking-number-area {
+
+                        .tracking-number {
+                            
+                            .value {
+                                color: #5F68B1;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
