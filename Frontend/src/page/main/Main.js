@@ -2,7 +2,6 @@ import './Main.scss'
 import Footer from '../../component/nav/footer/Footer'
 import SelectDeliveryCompany from '../../component/drawer/SelectDeliveryCompany'
 import React, { useState } from 'react'
-import Loading from '../../component/loading/xm/Loading'
 
 const Cards = () => {
     const data = [
@@ -67,7 +66,7 @@ function Main() {
         <div className='main-root-container'>
             <div className='main-top-area'>
                 <div className='button notification'>
-                    <img src='/asset/notification.svg' alt='알림'></img>
+                    <img src='/asset/main/notification.svg' alt='알림'></img>
                 </div>
                 <div className='top-text-box'>
                     운송장번호로<br />
@@ -75,10 +74,10 @@ function Main() {
                 </div>
                 <div className='search-area'>
                     <div className='parcel-box'>
-                        <img src='/asset/parcel-box.svg' alt='박스'></img>
+                        <img src='/asset/main/parcel-box.svg' alt='박스'></img>
                     </div>
                     <input className='search-input' type="text" />
-                    <div className='button search'><img src='/asset/search.svg' alt='검색' onClick={search} /></div>
+                    <div className='button search'><img src='/asset/main/search.svg' alt='검색' onClick={search} /></div>
                 </div>
                 <div className='recommend-area'>
                     <div className='company-icon button'>

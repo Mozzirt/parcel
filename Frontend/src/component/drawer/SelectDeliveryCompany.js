@@ -59,7 +59,7 @@ function SelectDeliveryCompany(props) {
           택배사 선택
         </div>
         <div className='button close'>
-          <img src='/asset/close_modal.svg' alt='close' onClick={closeModal}></img>
+          <img src='/asset/modal/close_modal.svg' alt='close' onClick={closeModal}></img>
         </div>
 
         <div className='delivery-division-box button'>
