@@ -33,11 +33,26 @@ const Cards = (props) => {
 }
 
 function SelectDeliveryCompany(props) {
-  const {display, closeModal} = props
+  const {modalState, closeModal, hideModal} = props
   const [slideIndex, setSlideIndex] = useState(0)
+  const modalRef = useRef()
   const sliderRef = useRef()
 
   const [selectedCard, setSelectedCard] = useState(null)
+
+  useEffect(() => {
+    document.addEventListener('mousedown', clickModalOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', clickModalOutside);
+    };
+  });
+
+  const clickModalOutside = event => {
+    if (modalState === 'show' && !modalRef.current.contains(event.target)) {
+      hideModal();
+    }
+  };
 
   const slickSetting = {
     infinite: true,
@@ -51,15 +66,14 @@ function SelectDeliveryCompany(props) {
     sliderRef.current.slickGoTo(index)
   }
 
-
   return (
-    <div className={'drawer-root-container' + (display ? ' show' : ' hide')}>
+    <div className={'drawer-root-container ' + modalState} ref={modalRef}>
       <div className='wrapper'>
         <div className='drawer-title'>
           택배사 선택
         </div>
         <div className='button close'>
-          <img src='/asset/modal/close_modal.svg' alt='close' onClick={closeModal}></img>
+          <img src='/asset/modal/close_modal.svg' alt='close' onClick={hideModal}></img>
         </div>
 
         <div className='delivery-division-box button'>
@@ -82,7 +96,7 @@ function SelectDeliveryCompany(props) {
 
 
         <div className='button button-container'>
-          <div className='button-name'>
+          <div className='button-name' onClick={closeModal}>
             배송조회
           </div>
         </div>

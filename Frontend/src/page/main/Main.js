@@ -52,15 +52,32 @@ const Cards = () => {
 
 function Main() {
     const [buttonActiveIndex, setButtonActiveIndex] = useState(0)
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalState, setModalState] = useState('close')
+    
+    const openModal = () => {
+        setModalState('show')
+        // TODO 공통으로 뺄 것
+        document.body.style.overflow = "hidden"
+    }
+    
+    const hideModal = () => {
+        document.body.style.overflow = "unset"
+        setModalState('hide')
+        
+        setTimeout(() => {
+            closeModal()
+        }, 800)
+    }
+    
+    const closeModal = () => {
+        document.body.style.overflow = "unset"
+        setModalState('close')
+    }
     
     const toggleActive = index => {
         setButtonActiveIndex(index)
     }
 
-    const search = () => {
-        setModalOpen(!modalOpen)
-    }
 
     return (
         <div className='main-root-container'>
@@ -77,7 +94,7 @@ function Main() {
                         <img src='/asset/main/parcel-box.svg' alt='박스'></img>
                     </div>
                     <input className='search-input' type="text" />
-                    <div className='button search'><img src='/asset/main/search.svg' alt='검색' onClick={search} /></div>
+                    <div className='button search'><img src='/asset/main/search.svg' alt='검색' onClick={openModal} /></div>
                 </div>
                 <div className='recommend-area'>
                     <div className='company-icon button'>
@@ -117,7 +134,7 @@ function Main() {
                 <Cards />
             </div>
             <Footer />
-            <SelectDeliveryCompany display={modalOpen} closeModal={() => setModalOpen(false)}></SelectDeliveryCompany>
+            <SelectDeliveryCompany modalState={modalState} closeModal={closeModal} hideModal={hideModal}></SelectDeliveryCompany>
         </div>
     );
 }
