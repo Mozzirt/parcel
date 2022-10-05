@@ -66,7 +66,7 @@ function Main() {
         
         setTimeout(() => {
             closeModal()
-        }, 800)
+        }, 700)
     }
     
     const closeModal = () => {
@@ -99,11 +99,11 @@ function Main() {
                 <div className='recommend-area'>
                     <div className='company-icon button'>
                         <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
-                        롯데택배
+                        우체국택배
                     </div>
                     <div className='company-icon button'>
                         <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
-                        롯데택배
+                        CJ대한통운
                     </div>
                     <div className='company-icon button'>
                         <img src='/asset/ci/circle-small/lotte.svg' alt='롯데'></img>
@@ -113,11 +113,11 @@ function Main() {
             </div>
             <div className='main-button-area'>
                 <div className='button delivery-status'>
-                    <div className={'left' + (buttonActiveIndex == 0 ? ' selected' : '')} onClick={() => toggleActive(0)}>
+                    <div className={'left' + (buttonActiveIndex === 0 ? ' selected' : '')} onClick={() => toggleActive(0)}>
                         배송현황
                     </div>
                     <div className='separator'></div>
-                    <div className={'right' + (buttonActiveIndex == 1 ? ' selected' : '')} onClick={() => toggleActive(1)}>
+                    <div className={'right' + (buttonActiveIndex === 1 ? ' selected' : '')} onClick={() => toggleActive(1)}>
                         배송완료
                     </div>
                 </div>
