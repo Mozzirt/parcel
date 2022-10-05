@@ -148,12 +148,10 @@
 
 @keyframes fadeOutDown {
   from {
-    opacity: 1;
     transform: translateY(0px);
   }
   to {
-    opacity: 0;
-    transform: translateY(500px);
+    transform: translateY(100vh);
   }
 }
 
