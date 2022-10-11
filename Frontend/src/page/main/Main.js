@@ -124,7 +124,7 @@ function Main() {
             </div>
             <div className='main-content'>
                 <div className='sort-area'>
-                    <div className='left'>
+                    <div className='button left'>
                         최신순
                     </div>
                     <div className='button right'>
