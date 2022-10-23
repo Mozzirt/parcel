@@ -1,7 +1,7 @@
 package com.mozzi.parcelpjt.service;
 
 import com.mozzi.parcelpjt.config.annotation.TimeLog;
-import com.mozzi.parcelpjt.config.response.company.CompanyConstants;
+import com.mozzi.parcelpjt.config.response.CompanyConstants;
 import com.mozzi.parcelpjt.config.util.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.mozzi.parcelpjt.config.response.CommonConstants;
+import com.mozzi.parcelpjt.config.response.MessageConstants;
 import org.json.JSONObject;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.mozzi.parcelpjt.config.response.CommonConstants.*;
+import static com.mozzi.parcelpjt.config.response.MessageConstants.*;
 
 /**
  * 운송장번호 자리수 (코드공통화필요)
@@ -68,7 +68,7 @@ public class ParcelService {
         JSONObject resultJson = new JSONObject();
 
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.LOTTE_GLOGIS);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
 
         // 운송장번호 발송지 도착지 배달결과  ::  단계 시간 현재위치 처리현황
         try {
@@ -144,7 +144,7 @@ public class ParcelService {
         JSONObject resultJson = new JSONObject();
 
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.CJ_LOGITICS);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
         try {
             String URL = "https://www.cjlogistics.com/ko/tool/parcel/tracking";
             Connection res = Jsoup.connect(URL)
@@ -203,7 +203,7 @@ public class ParcelService {
         JSONObject resultJson = new JSONObject();
 
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.EPOST);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
         try{
             String URL = "https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=" + waybill;
             Document res = Jsoup.connect(URL)
@@ -241,7 +241,7 @@ public class ParcelService {
 
         JSONObject resultJson = new JSONObject();
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.HANJIN);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
 
         try{
             String URL = "http://www.hanjinexpress.hanjin.net/customer/hddcw18.tracking";
@@ -284,7 +284,7 @@ public class ParcelService {
 
         JSONObject resultJson = new JSONObject();
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.ILOGEN);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
 
         try{
             String URL = "https://www.ilogen.com/web/personal/trace/"+waybill;
@@ -334,7 +334,7 @@ public class ParcelService {
     public JSONObject kdexp(String waybill){
         JSONObject resultJson = new JSONObject();
         boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.KDEXP);
-        if(!validate) return resultJson.put("error", CommonConstants.RS_00_0001);
+        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
 
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -428,7 +428,7 @@ public class ParcelService {
         }catch (HttpStatusCodeException e){
             String statusCode = e.getStatusCode().toString();
             if (statusCode.equals("404 NOT_FOUND")){
-                resultJson.put("error", CommonConstants.RS_00_0001);
+                resultJson.put("error", MessageConstants.RS_00_0001);
                 return resultJson;
             }
         }catch (Exception e){
@@ -492,7 +492,7 @@ public class ParcelService {
                 break;
             default:
                 log.warn("#### 존재하지않은 회사 접근시도 :: 회사명 :: 운송장번호 ::  {} , [ {} ]", company, waybill);
-                jo.put("error", CommonConstants.RS_00_0005);
+                jo.put("error", MessageConstants.RS_00_0005);
                 break;
         }
         return jo;

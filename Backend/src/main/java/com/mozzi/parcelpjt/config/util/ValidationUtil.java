@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import java.util.List;
 
-import static com.mozzi.parcelpjt.config.response.CommonConstants.RS_00_0006;
+import static com.mozzi.parcelpjt.config.response.MessageConstants.RS_00_0006;
 
 /**
  * 작성자 : beomchul.kim@lotte.net

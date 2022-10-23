@@ -1,4 +1,4 @@
-package com.mozzi.parcelpjt.config.response.company;
+package com.mozzi.parcelpjt.config.response;
 
 
 /**
