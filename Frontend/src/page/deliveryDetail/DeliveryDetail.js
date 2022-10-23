@@ -24,12 +24,22 @@ function DeliveryDetail(props) {
                     </div>
                 </div>
                 <div className="delivery-status">
-                    <img src='/asset/deliveryStatus/인수.svg' alt='인수'></img>
-                    <div className='division'></div>
-                    <img src='/asset/deliveryStatus/이동중.svg' alt='인수'></img>
-                    <img src='/asset/deliveryStatus/배달지.svg' alt='인수'></img>
-                    <img src='/asset/deliveryStatus/배송중.svg' alt='인수'></img>
-                    <img src='/asset/deliveryStatus/완료.svg' alt='인수'></img>
+                    <div className='icon'>
+                        <img src='/asset/deliveryStatus/인수.svg' alt='인수'></img>
+                        <img src='/asset/deliveryStatus/이동중.svg' alt='인수'></img>
+                        <img src='/asset/deliveryStatus/배달지.svg' alt='인수'></img>
+                        <img src='/asset/deliveryStatus/배송중.svg' alt='인수'></img>
+                        <img src='/asset/deliveryStatus/완료.svg' alt='인수'></img>
+                        <div className='division'></div>
+
+                    </div>
+                    <div className='text'>
+                        <div className='status'>인수</div>
+                        <div className='status'>이동중</div>
+                        <div className='status'>배달중</div>
+                        <div className='status'>배송중</div>
+                        <div className='status'>완료</div>
+                    </div>
                 </div>
             </div>
             <div className="bottom-area">

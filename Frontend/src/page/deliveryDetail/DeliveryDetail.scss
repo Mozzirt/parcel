@@ -47,15 +47,38 @@
         }
 
         .delivery-status {
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
+            width: 100%;
 
-            .division {
-                height: 0px;
-                width: 20px;
-                border: 1.5px solid #DFDFDF;
+            .icon {
+                display: flex;
+                margin-top: 40px;
+                align-items: center;
+                justify-content: space-between;
+
+                .division {
+                    position: absolute;
+                    z-index: -1;
+                    height: 0px;
+                    width: calc(100vw - 70px);
+                    border: 1.5px solid #DFDFDF;
+                }
             }
+
+            .text {
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                color: #878C94;
+                font-size: 14px;
+                letter-spacing: 0.25px;
+
+                .status {
+                    display: flex;
+                    width: 3em;
+                    justify-content: center;
+                }
+            }
+
         }
     }
 }
