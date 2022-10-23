@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mozzi.parcelpjt.mapper.MemberMapper">
+
+    <insert id="joinMember">
+        INSERT
+        INTO member(deviceUuid, deviceModel)
+        VALUES (#{deviceUUID}, #{deviceModel})
+    </insert>
+
+    <select id="selectMember" resultType="com.mozzi.parcelpjt.dto.Member">
+        SELECT
+             deviceUuid
+            ,deviceModel
+            ,snsConnect
+            ,createDate
+        FROM member
+        WHERE deviceUuid = #{deviceUUID}
+    </select>
+
+</mapper>

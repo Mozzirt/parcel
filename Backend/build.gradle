@@ -1,0 +1,78 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+}
+
+group = 'com.mozzi'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+bootJar{
+    archivesBaseName = 'parcel'
+    archiveFileName = 'parcel.jar'
+    archiveVersion = "0.0.1"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'junit:junit:4.13.1'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // swagger 추가
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+    // aop 추가
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    //validation 추가
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //	TODO AWS RDS 생성후 추후 추가 필요
+    //	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    //	TODO AWS RDS 생성후 추후 제거 필요
+    implementation 'com.h2database:h2:1.4.200'
+
+    // lombok
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+
+    // lucy
+    implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.1'
+    implementation 'com.navercorp.lucy:lucy-xss:1.6.3'
+
+    //StringEscapeUtils
+    implementation 'org.apache.commons:commons-text:1.9'
+
+    // json
+    implementation 'org.json:json:20171018'
+
+    // mysql 및 mybatis 사용 의존성.
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+
+    // crawler
+    implementation 'org.jsoup:jsoup:1.15.3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // 테스트 롬복
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
