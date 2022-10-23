@@ -13,21 +13,23 @@ function DeliveryDetail(props) {
                             롯데택배 (현대택배)
                         </div>
                         <div className="detail-info">
-                            <div className="date">
+                            <div>
                                 접수일자 : <span>2022-09-13 21:00</span>
                             </div>
                             <div className="tracking-number-area">
-                                <div className='tracking-number'>
-                                    운송장번호 : 
-                                    <span className='value'> 220-S0-227932323..</span>
-                                    <img src='/asset/etc/copy.svg' alt='copy'></img>
-                                </div>
+                                운송장번호 : <span className='tracking-number'> 220-S0-227932323..</span>
+                                <img src='/asset/etc/copy.svg' alt='copy'></img>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="delivery-status">
-
+                    <img src='/asset/deliveryStatus/인수.svg' alt='인수'></img>
+                    <div className='division'></div>
+                    <img src='/asset/deliveryStatus/이동중.svg' alt='인수'></img>
+                    <img src='/asset/deliveryStatus/배달지.svg' alt='인수'></img>
+                    <img src='/asset/deliveryStatus/배송중.svg' alt='인수'></img>
+                    <img src='/asset/deliveryStatus/완료.svg' alt='인수'></img>
                 </div>
             </div>
             <div className="bottom-area">
