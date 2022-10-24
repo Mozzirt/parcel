@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -17,12 +16,13 @@ public class LoginController {
     private final MemberService memberService;
 
     @PostMapping("/user")
-    public Long login(@RequestParam String deviceUUID, @RequestParam String deviceModel, HttpServletRequest request){
+    public Long register(@RequestParam String deviceUUID, @RequestParam String deviceModel, HttpServletRequest request){
         return memberService.joinMember(deviceUUID, deviceModel, request);
     }
 
     @GetMapping("/user")
-    public Member login(@RequestParam String deviceUUID) {
+    public Member findUserInfo(@RequestParam String deviceUUID) {
         return memberService.selectMember(deviceUUID);
     }
+
 }

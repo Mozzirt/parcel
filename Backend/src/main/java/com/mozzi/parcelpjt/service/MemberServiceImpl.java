@@ -1,14 +1,17 @@
 package com.mozzi.parcelpjt.service;
 
 import com.mozzi.parcelpjt.config.response.CommonConstants;
+import com.mozzi.parcelpjt.controller.exception.custom.DuplicateDeviceException;
 import com.mozzi.parcelpjt.dto.Member;
 import com.mozzi.parcelpjt.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static com.mozzi.parcelpjt.config.response.CommonConstants.*;
 import static com.mozzi.parcelpjt.config.response.CommonConstants.IS_EDGE;
@@ -23,6 +26,16 @@ public class MemberServiceImpl implements MemberService {
     public Long joinMember(String deviceUUID, String deviceModel, HttpServletRequest request) {
         String ip = ipCheck(request);
         String browser = deviceCheck(request);
+        Member member = this.selectMember(deviceUUID);
+        // 디바이스 정보 존재시 로그인처리
+        if (!ObjectUtils.isEmpty(member)) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute(SESSION_NAME, deviceUUID);
+            return 9L;
+        }
+//        if(!ObjectUtils.isEmpty(member)) {
+//            throw new DuplicateDeviceException(deviceUUID);
+//        }
         return memberMapper.joinMember(deviceUUID, deviceModel, browser, ip);
     }
 

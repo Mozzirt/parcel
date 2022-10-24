@@ -13,4 +13,8 @@ public class Pointcuts {
     @Pointcut("allServicePointcut() && allControllerPointcut()")
     public void allControllerAndServicePointcut() {}
 
+    @Pointcut("execution(* com.mozzi..parcelpjt.controller.CryptController.*(..))")
+    public void cryptoAuthPointcut() {}
+
+
 }

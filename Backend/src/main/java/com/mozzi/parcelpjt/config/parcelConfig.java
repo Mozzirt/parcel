@@ -1,5 +1,6 @@
 package com.mozzi.parcelpjt.config;
 
+import com.mozzi.parcelpjt.config.aop.AuthAop;
 import com.mozzi.parcelpjt.config.aop.TimeAop;
 import com.mozzi.parcelpjt.config.filter.DeviceCheckFilter;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
@@ -17,6 +18,12 @@ public class parcelConfig {
     @Bean
     public TimeAop timeAop() {
         return new TimeAop();
+    }
+
+    // AuthAop
+    @Bean
+    public AuthAop authAop() {
+        return new AuthAop();
     }
 
     // deviceCheck Filter

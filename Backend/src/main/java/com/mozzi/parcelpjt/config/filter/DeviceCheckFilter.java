@@ -16,13 +16,11 @@ import static com.mozzi.parcelpjt.config.response.CommonConstants.SESSION_NAME;
 public class DeviceCheckFilter implements Filter {
 
     private static final String[] whitelist = {"/*"};
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
-
         try{
             if(checkPath(requestURI)){
                 HttpSession session = httpRequest.getSession(false);

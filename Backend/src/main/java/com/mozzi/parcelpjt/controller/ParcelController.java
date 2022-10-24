@@ -1,5 +1,6 @@
 package com.mozzi.parcelpjt.controller;
 
+import com.mozzi.parcelpjt.config.annotation.TimeLog;
 import com.mozzi.parcelpjt.service.ParcelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ParcelController {
 
     private final ParcelService parcelService;
-
+    @TimeLog
     @GetMapping(value="/parcel-info/{company}/{waybill}", produces="application/json")
     public String getShippingInfo(@PathVariable String company, @PathVariable String waybill){
         if (company.length() == 0) return null;

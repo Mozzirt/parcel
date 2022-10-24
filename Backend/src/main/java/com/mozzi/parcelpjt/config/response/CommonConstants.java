@@ -7,6 +7,9 @@ public final class CommonConstants {
     public static final String CLIMB_STATUS = "climbStatus";
     public static final String SERVER_URL = "http://localhost:8080";
     public static final String USER_AGENT = "user-agent";
+    public static final String IS_ADMIN = "admin";
+
+    // DEVICE
     public static final String IS_IOS = "ios";
     public static final String IS_ANDROID = "android";
     public static final String IS_BLACKBERRY = "blackberry";

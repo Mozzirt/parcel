@@ -1,14 +1,17 @@
 package com.mozzi.parcelpjt.controller;
 
+import com.mozzi.parcelpjt.controller.exception.custom.UnauthorizedException;
 import com.mozzi.parcelpjt.service.CryptoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
+@RequestMapping("/crypto")
 @RequiredArgsConstructor
 public class CryptController {
 

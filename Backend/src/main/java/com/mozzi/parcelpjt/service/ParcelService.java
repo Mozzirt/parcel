@@ -46,7 +46,6 @@ import static com.mozzi.parcelpjt.config.response.MessageConstants.*;
  */
 
 @Slf4j
-@TimeLog
 @Service
 public class ParcelService {
 
