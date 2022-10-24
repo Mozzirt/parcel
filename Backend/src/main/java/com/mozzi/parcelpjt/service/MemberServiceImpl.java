@@ -1,7 +1,6 @@
 package com.mozzi.parcelpjt.service;
 
 import com.mozzi.parcelpjt.config.response.CommonConstants;
-import com.mozzi.parcelpjt.controller.exception.custom.DuplicateDeviceException;
 import com.mozzi.parcelpjt.dto.Member;
 import com.mozzi.parcelpjt.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,5 @@
 package com.mozzi.parcelpjt.controller;
 
-import com.mozzi.parcelpjt.controller.exception.custom.UnauthorizedException;
 import com.mozzi.parcelpjt.service.CryptoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

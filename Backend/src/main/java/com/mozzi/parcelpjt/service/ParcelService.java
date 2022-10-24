@@ -1,6 +1,5 @@
 package com.mozzi.parcelpjt.service;
 
-import com.mozzi.parcelpjt.config.annotation.TimeLog;
 import com.mozzi.parcelpjt.config.response.CompanyConstants;
 import com.mozzi.parcelpjt.config.util.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
