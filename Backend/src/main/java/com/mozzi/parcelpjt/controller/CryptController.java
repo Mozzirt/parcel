@@ -25,8 +25,4 @@ public class CryptController {
         log.info("##### Decrypt 실행 ##### => {}", data);
         return cryptoService.decrypt(data);
     }
-
-
-
-
 }

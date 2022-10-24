@@ -29,7 +29,6 @@ public class ParcelController {
         // 경동택배 :: kdexp :: https://mybae.kr/article/view/code/kdDeliveryNumber/codeNo/413  3204253820555
         // DHL :: dhl :: 6343512954
         // F711NKSU2AUJ7 기기고유값
-
         JSONObject resJo = parcelService.findFunc(company, waybill);
         return resJo.toString();
     }

@@ -4,14 +4,16 @@
 
     <insert id="joinMember">
         INSERT
-        INTO member(deviceUuid, deviceModel)
-        VALUES (#{deviceUUID}, #{deviceModel})
+        INTO member(deviceUuid, deviceModel, browser, ip)
+        VALUES (#{deviceUUID}, #{deviceModel}, #{browser}, #{ip})
     </insert>
 
     <select id="selectMember" resultType="com.mozzi.parcelpjt.dto.Member">
         SELECT
              deviceUuid
             ,deviceModel
+            ,browser
+            ,ip
             ,snsConnect
             ,createDate
         FROM member
