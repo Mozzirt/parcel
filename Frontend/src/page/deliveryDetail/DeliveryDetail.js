@@ -44,27 +44,76 @@ function DeliveryDetail(props) {
             </div>
             <div className="bottom-area">
                 <div className="page-name">
-
+                    상세조회
                 </div>
-                <div className="delivery-step"></div>
-                <div className="delivery-history-card">
-                    <div className="history-date"></div>
-                    <div className="history-location">
-                        <div className="status">
-
+                <div className="delivery-step">
+                    <img src='/asset/deliverySetp/1.svg' alt='1'></img>
+                    <div className="delivery-history-card">
+                        <div className="history-date">2022-09-14 16:18</div>
+                        <div className="history-location">
+                            <span className="status">
+                                위치 :
+                            </span>
+                            <span className="status-value">
+                               경기군포당정
+                            </span>
                         </div>
-                        <div className="status-value">
-                            
+                        <div className="history-status-info">
+                            <div className="status">
+                                상세설명 :
+                            </div>
+                            <div className="status-value">
+                               보내시는 고객님으로부터 상품을...
+                            </div>
                         </div>
                     </div>
-                    <div className="history-status-info"></div>
-                        <div className="status">
-
-                        </div>
-                        <div className="status-value">
-
-                        </div>
                 </div>
+                <div className="delivery-step">
+                    <img src='/asset/deliverySetp/2.svg' alt='1'></img>
+                    <div className="delivery-history-card">
+                        <div className="history-date">2022-09-14 16:18</div>
+                        <div className="history-location">
+                            <span className="status">
+                                위치 :
+                            </span>
+                            <span className="status-value">
+                               경기군포당정
+                            </span>
+                        </div>
+                        <div className="history-status-info">
+                            <div className="status">
+                                상세설명 :
+                            </div>
+                            <div className="status-value">
+                               보내시는 고객님으로부터 상품을...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="delivery-step">
+                    <img src='/asset/deliverySetp/3.svg' alt='2'></img>
+                    <div className="delivery-history-card">
+                        <div className="history-date">2022-09-14 16:18</div>
+                        <div className="history-location">
+                            <span className="status">
+                                위치 :
+                            </span>
+                            <span className="status-value">
+                               경기군포당정
+                            </span>
+                        </div>
+                        <div className="history-status-info">
+                            <div className="status">
+                                상세설명 :
+                            </div>
+                            <div className="status-value">
+                               보내시는 고객님으로부터 상품을...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    {/* <img src='/asset/deliverySetp/2.svg' alt='2'></img>
+                    <img src='/asset/deliverySetp/3.svg' alt='3'></img> */}
             </div>
         </div>
     )
