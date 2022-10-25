@@ -2,6 +2,8 @@ package com.mozzi.parcelpjt.controller.exception;
 
 import com.mozzi.parcelpjt.config.response.MessageConstants;
 import com.mozzi.parcelpjt.controller.exception.custom.DuplicateDeviceException;
+import com.mozzi.parcelpjt.controller.exception.custom.NoDataException;
+import com.mozzi.parcelpjt.controller.exception.custom.NoSuchTrackingNumberException;
 import com.mozzi.parcelpjt.controller.exception.custom.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -74,6 +76,28 @@ public class ControllerAdvice {
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(NoSuchTrackingNumberException.class)
+    public ResponseEntity<ResponseMessage> noSuchTrackingNumberException(NoSuchTrackingNumberException exception) {
+        log.warn("##### noSuchTrackingNumberException : {}", exception);
+        return new ResponseEntity(ResponseMessage.builder()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .resultCode(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .error(MessageConstants.RS_00_0001)
+                .detailMessage(exception.getMessage())
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoDataException.class)
+    public ResponseEntity<ResponseMessage> noDataException(NoDataException exception) {
+        log.warn("##### noDataException : {}", exception);
+        return new ResponseEntity(ResponseMessage.builder()
+                .statusCode(HttpStatus.NO_CONTENT.value())
+                .resultCode(HttpStatus.NO_CONTENT.getReasonPhrase())
+                .error(MessageConstants.RS_00_0006)
+                .detailMessage(exception.getMessage())
+                .build(), HttpStatus.NO_CONTENT);
+    }
+
     @ExceptionHandler(DuplicateDeviceException.class)
     public ResponseEntity<ResponseMessage> customDuplicateDeviceException(DuplicateDeviceException exception) {
         log.warn("##### customDuplicateDeviceException : {}", exception);
@@ -84,6 +108,7 @@ public class ControllerAdvice {
                 .detailMessage(exception.getMessage())
                 .build(), HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ResponseMessage> customUnauthorizedException(UnauthorizedException exception) {
         log.warn("##### customUnauthorizedException : {}", exception);

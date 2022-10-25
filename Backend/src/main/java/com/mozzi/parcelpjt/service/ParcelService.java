@@ -2,6 +2,8 @@ package com.mozzi.parcelpjt.service;
 
 import com.mozzi.parcelpjt.config.response.CompanyConstants;
 import com.mozzi.parcelpjt.config.util.ValidationUtil;
+import com.mozzi.parcelpjt.controller.exception.custom.NoDataException;
+import com.mozzi.parcelpjt.controller.exception.custom.NoSuchTrackingNumberException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.jsoup.Connection;
@@ -22,10 +24,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.mozzi.parcelpjt.config.response.MessageConstants.*;
 
@@ -65,8 +64,8 @@ public class ParcelService {
     public JSONObject lotteGlogis(String waybill){
         JSONObject resultJson = new JSONObject();
 
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.LOTTE_GLOGIS);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.LOTTE_GLOGIS);
 
         // 운송장번호 발송지 도착지 배달결과  ::  단계 시간 현재위치 처리현황
         try {
@@ -79,8 +78,7 @@ public class ParcelService {
 
             // 존재하지않거나 준비중일경우
             if (lotteTable.size() % 4 != 0){
-                resultJson.put("error", lotteTable.get(0).text());
-                return resultJson;
+                throw new NoDataException(lotteTable.get(0).text());
             }
 
             resultJson = addDefaultResponse(resultJson, lotteTable.get(0).text(), lotteTable.get(1).text(), lotteTable.get(2).text(), lotteTable.get(3).text());
@@ -112,8 +110,7 @@ public class ParcelService {
             JSONObject body = new JSONObject(res.body().select("body").text());
             // 데이터가 없다면
             if (body.get("data").toString().equals("null")) {
-                resultJson.put("error", RS_00_0006);
-                return resultJson;
+                throw new NoDataException(RS_00_0006);
             }
 
             JSONArray bodyJr = (JSONArray) body.getJSONObject("data").get("trace_infos");
@@ -141,8 +138,9 @@ public class ParcelService {
     public JSONObject cjLogitics(String waybill){
         JSONObject resultJson = new JSONObject();
 
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.CJ_LOGITICS);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.CJ_LOGITICS);
+
         try {
             String URL = "https://www.cjlogistics.com/ko/tool/parcel/tracking";
             Connection res = Jsoup.connect(URL)
@@ -172,8 +170,7 @@ public class ParcelService {
             JSONArray headJr = (JSONArray) jo.getJSONObject("parcelResultMap").get("resultList");
             // head 데이터 체크
             if (headJr.length() == 0) {
-                resultJson.put("error", RS_00_0006);
-                return resultJson;
+                throw new NoDataException(RS_00_0006);
             }
 
             resultJson = addDefaultResponse(resultJson, (String) headJr.getJSONObject(0).get("invcNo"), (String) headJr.getJSONObject(0).get("sendrNm"), (String) headJr.getJSONObject(0).get("rcvrNm"), "");
@@ -200,8 +197,9 @@ public class ParcelService {
     public JSONObject epost(String waybill){
         JSONObject resultJson = new JSONObject();
 
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.EPOST);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.EPOST);
+
         try{
             String URL = "https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=" + waybill;
             Document res = Jsoup.connect(URL)
@@ -218,7 +216,10 @@ public class ParcelService {
 
             Elements processTable = res.body().getElementById("processTable").select("td");
             // body 데이터 체크
-            if (processTable.size() == 0) ValidationUtil.isEmpty(bodyList, new JSONObject());
+            if (processTable.size() == 0) {
+                throw new NoDataException(RS_00_0006);
+                // ValidationUtil.isEmpty(bodyList, new JSONObject());
+            }
 
             for(int i=0; i<processTable.size(); i=i+4){
                 Map<String, String> resultMap = addMultiResponse(processTable.get(i+3).text(), processTable.get(i+2).text(), processTable.get(i).text() + " " + processTable.get(i+1).text(), "");
@@ -238,8 +239,8 @@ public class ParcelService {
     public JSONObject hanjin(String waybill){
 
         JSONObject resultJson = new JSONObject();
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.HANJIN);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.HANJIN);
 
         try{
             String URL = "http://www.hanjinexpress.hanjin.net/customer/hddcw18.tracking";
@@ -251,8 +252,7 @@ public class ParcelService {
             Elements headData = res.body().select("table").get(0).select("td");
             // 테이블 체크
             if(res.body().select("table").size() == 1){
-                resultJson.put("error", RS_00_0006);
-                return resultJson;
+                throw new NoDataException(RS_00_0006);
             }
             Elements bodyData = res.body().select("table").get(1).select("td");
 
@@ -281,8 +281,8 @@ public class ParcelService {
     public JSONObject logen(String waybill){
 
         JSONObject resultJson = new JSONObject();
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.ILOGEN);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.ILOGEN);
 
         try{
             String URL = "https://www.ilogen.com/web/personal/trace/"+waybill;
@@ -294,8 +294,7 @@ public class ParcelService {
 
             // 테이블 체크
             if(res.body().select("table").size() == 1){
-                resultJson.put("error", RS_00_0006);
-                return resultJson;
+                throw new NoDataException(RS_00_0006);
             }
             Elements bodyData = res.body().select("table").get(1).select("td");
 
@@ -331,8 +330,8 @@ public class ParcelService {
     // 경동택배
     public JSONObject kdexp(String waybill){
         JSONObject resultJson = new JSONObject();
-        boolean validate = ValidationUtil.validateWaybillNumber(waybill, CompanyConstants.KDEXP);
-        if(!validate) return resultJson.put("error", MessageConstants.RS_00_0001);
+        // 운송장번호 체크
+        noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.KDEXP);
 
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -349,8 +348,7 @@ public class ParcelService {
         JSONObject jo = new JSONObject(response.getBody());
 
         if (jo.get("result").equals("fail")) {
-            resultJson.put("error", RS_00_0006);
-            return resultJson;
+            throw new NoDataException(RS_00_0006);
         }
 
         try{
@@ -426,8 +424,9 @@ public class ParcelService {
         }catch (HttpStatusCodeException e){
             String statusCode = e.getStatusCode().toString();
             if (statusCode.equals("404 NOT_FOUND")){
-                resultJson.put("error", MessageConstants.RS_00_0001);
-                return resultJson;
+                noSuchTrackingNumberExceptionThrower(waybill, CompanyConstants.LOTTE_GLOGIS);
+                // resultJson.put("error", MessageConstants.RS_00_0001);
+                // return resultJson;
             }
         }catch (Exception e){
             log.error("##### :: DHL 조회에러 :: #####");
@@ -437,13 +436,22 @@ public class ParcelService {
         return resultJson;
     }
 
+    /**
+     * 공통화
+     */
+    private void noSuchTrackingNumberExceptionThrower(String waybill, String company) {
+        boolean validate = ValidationUtil.validateWaybillNumber(waybill, company);
+        StringBuilder mixedData = new StringBuilder(company + "," + waybill);
+        if(!validate) throw new NoSuchTrackingNumberException(mixedData.toString());
+    }
+
     private Map<String, String> addMultiResponse(String process, String location, String time, String explain) {
-        Map<String, String> tempMap = new HashMap<>();
-        tempMap.put("process", process);
-        tempMap.put("location", location);
-        tempMap.put("time", time);
-        tempMap.put("explain", explain);
-        return tempMap;
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("process", process);
+        resultMap.put("location", location);
+        resultMap.put("time", time);
+        resultMap.put("explain", explain);
+        return resultMap;
     }
 
     private JSONObject addDefaultResponse(JSONObject resultJson, String no, String from, String to, String result) {

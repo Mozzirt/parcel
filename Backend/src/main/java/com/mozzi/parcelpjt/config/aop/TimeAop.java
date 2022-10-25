@@ -17,7 +17,7 @@ public class TimeAop {
         long afTime = System.currentTimeMillis();
 
         long response = (afTime - bfTime)/1000;
-        log.info("[Response time] = {}초", response);
+        log.debug("[Response time] = {}초", response);
 
         if (response >= 10){
             log.warn("[Delayed Response time] = {}, {}초", joinPoint.getSignature(), response);
