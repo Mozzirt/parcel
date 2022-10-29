@@ -31,7 +31,7 @@ public class parcelConfig {
     public FilterRegistrationBean deviceCheckFilter(){
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
         filterFilterRegistrationBean.setFilter(new DeviceCheckFilter());
-        filterFilterRegistrationBean.setOrder(1);
+        filterFilterRegistrationBean.setOrder(2);
         filterFilterRegistrationBean.addUrlPatterns("/*");
         return filterFilterRegistrationBean;
     }
@@ -41,7 +41,7 @@ public class parcelConfig {
     public FilterRegistrationBean<XssEscapeServletFilter> filterRegistrationBean() {
         FilterRegistrationBean<XssEscapeServletFilter> filterRegistration = new FilterRegistrationBean<>();
         filterRegistration.setFilter(new XssEscapeServletFilter());
-        filterRegistration.setOrder(2);
+        filterRegistration.setOrder(1);
         filterRegistration.addUrlPatterns("/*");
         return filterRegistration;
     }

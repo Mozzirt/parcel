@@ -10,6 +10,7 @@ public class Pointcuts {
     @Pointcut("execution(* com.mozzi..parcelpjt.controller..*(..))")
     public void allControllerPointcut() {}
 
+    @Deprecated
     @Pointcut("allServicePointcut() && allControllerPointcut()")
     public void allControllerAndServicePointcut() {}
 

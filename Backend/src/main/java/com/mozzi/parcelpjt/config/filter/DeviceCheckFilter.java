@@ -16,6 +16,7 @@ import static com.mozzi.parcelpjt.config.response.CommonConstants.SESSION_NAME;
 public class DeviceCheckFilter implements Filter {
 
     private static final String[] whitelist = {"/*"};
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;

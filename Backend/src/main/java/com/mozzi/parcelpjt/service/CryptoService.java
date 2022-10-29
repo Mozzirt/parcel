@@ -14,7 +14,7 @@ public class CryptoService {
 
     @Value("${crypto.secret}")
     private String secretKey;
-    private final  String aesAlgorithm = "AES/CBC/PKCS5Padding";
+    private final String aesAlgorithm = "AES/CBC/PKCS5Padding";
 
     /**
      * 데이터 암호화

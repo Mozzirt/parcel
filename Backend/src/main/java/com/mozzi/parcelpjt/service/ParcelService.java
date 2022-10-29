@@ -119,7 +119,10 @@ public class ParcelService {
 
             List bodyList = new ArrayList();
             // body 데이터 체크
-            if (bodyJr.length() == 0) ValidationUtil.isEmpty(bodyList, new JSONObject());
+            if (bodyJr.length() == 0) {
+                throw new NoDataException(RS_00_0006);
+                //ValidationUtil.isEmpty(bodyList, new JSONObject());
+            }
 
             for(int i=0; i<bodyJr.length(); i++){
                 JSONObject forJson = bodyJr.getJSONObject(i);
@@ -177,7 +180,10 @@ public class ParcelService {
             JSONArray bodyJr = (JSONArray) jo.getJSONObject("parcelDetailResultMap").get("resultList");
 
             // body 데이터 체크
-            if (bodyJr.length() == 0) ValidationUtil.isEmpty(bodyList, new JSONObject());
+            if (bodyJr.length() == 0) {
+                throw new NoDataException(RS_00_0006);
+                // ValidationUtil.isEmpty(bodyList, new JSONObject());
+            }
 
             for(int i=0; i<bodyJr.length(); i++){
                 JSONObject forJson = bodyJr.getJSONObject(i);
@@ -261,7 +267,10 @@ public class ParcelService {
             resultJson = addDefaultResponse(resultJson, waybill, headData.get(1).text(), headData.get(2).text(), bodyData.get(bodyData.size()-1).select("strong").text());
 
             // body 데이터 체크
-            if (bodyData.size() == 0) ValidationUtil.isEmpty(bodyList, new JSONObject());
+            if (bodyData.size() == 0) {
+                throw new NoDataException(RS_00_0006);
+                // ValidationUtil.isEmpty(bodyList, new JSONObject());
+            }
 
             for(int i=0; i<bodyData.size(); i=i+4){
                 Map<String, String> resultMap = addMultiResponse("", bodyData.get(i+2).text(), bodyData.get(i).text() + " " + bodyData.get(i+1).text(), bodyData.get(i+3).text());
@@ -303,7 +312,10 @@ public class ParcelService {
 
             // body 데이터 체크
             List bodyList = new ArrayList();
-            if (bodyData.size() == 0) ValidationUtil.isEmpty(bodyList, new JSONObject());
+            if (bodyData.size() == 0) {
+                throw new NoDataException(RS_00_0006);
+                // ValidationUtil.isEmpty(bodyList, new JSONObject());
+            }
 
             for(int i=0; i<bodyData.size(); i=i+8){
                 Map<String, String> resultMap = addMultiResponse(bodyData.get(i+2).text(), bodyData.get(i+1).text(), bodyData.get(i).text(), bodyData.get(i+3).text());
