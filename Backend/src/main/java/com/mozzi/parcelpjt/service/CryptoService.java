@@ -8,6 +8,10 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * 네이티브에서 처리 후 전송예정
+ * 1. AWS서버 올린 후 개발테스트
+ */
 @Slf4j
 @Service
 public class CryptoService {
@@ -19,6 +23,7 @@ public class CryptoService {
     /**
      * 데이터 암호화
      */
+    @Deprecated
     public String encrypt(String text) throws Exception {
         Cipher cipher = Cipher.getInstance(aesAlgorithm);
         SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
@@ -32,6 +37,7 @@ public class CryptoService {
     /**
      * 데이터 복호화
      */
+    @Deprecated
     public String decrypt(String cipherText) throws Exception {
         Cipher cipher = Cipher.getInstance(aesAlgorithm);
         SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
